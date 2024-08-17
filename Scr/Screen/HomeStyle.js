@@ -19,5 +19,6 @@ export const HomeStyle = StyleSheet.create({
     color: colors.textPrimary,
     fontFamily: fontFamilies.bold,
     paddingHorizontal: spacing.lg,
+    paddingVertical: spacing.md,
   },
 });
