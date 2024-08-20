@@ -10,6 +10,7 @@ import {
 } from './PlayerControls';
 import {useSharedValue} from 'react-native-reanimated';
 import {Slider} from 'react-native-awesome-slider';
+import MovingText from './MovingText';
 
 const ImageUrl =
   'https://linkstorage.linkfire.com/medialinks/images/9ff1e498-61dd-4a27-9854-79b3342f4bca/artwork-440x440.jpg';
@@ -19,7 +20,7 @@ const FloatingPlayer = () => {
   const max = useSharedValue(100);
   return (
     <View>
-      <View>
+      <View style={{zIndex: 1}}>
         <Slider
           style={styles.container}
           progress={progress}
@@ -29,12 +30,18 @@ const FloatingPlayer = () => {
             maximumTrackTintColor: colors.maxTrackTintColor,
             minimumTrackTintColor: colors.minTrackTintColor,
           }}
+          renderBubble={() => <View />}
         />
       </View>
       <TouchableOpacity style={styles.container} activeOpacity={0.85}>
         <Image source={{uri: ImageUrl}} style={styles.coverImage} />
         <View style={styles.titleContainer}>
-          <Text style={styles.title}>Always Be</Text>
+          {/* <Text style={styles.title}>Always Be</Text> */}
+          <MovingText
+            text="Always Be"
+            animationThreshold={5}
+            style={styles.title}
+          />
           <Text style={styles.artist}>Netrum</Text>
         </View>
         <View style={styles.playerControlContainer}>
@@ -55,13 +62,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   coverImage: {
-    width: 70,
-    height: 70,
-    // resizeMode: 'cover',
+    width: 60,
+    height: 60,
+    resizeMode: 'cover',
   },
   titleContainer: {
     flex: 1,
     paddingHorizontal: spacing.sm,
+    overflow: 'hidden',
+    marginLeft: spacing.sm,
+    marginRight: spacing.lg,
   },
   title: {
     color: colors.textPrimary,
