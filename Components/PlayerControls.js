@@ -6,7 +6,7 @@ import React from 'react';
 import {iconSizes} from '../Scr/Constants/dimensions';
 export const GotoPreviousButton = ({size = iconSizes.xl}) => {
   return (
-    <TouchableOpacity>
+    <TouchableOpacity activeOpacity={0.85}>
       <FontAwesome6
         name={'backward-step'}
         size={size}
@@ -18,7 +18,7 @@ export const GotoPreviousButton = ({size = iconSizes.xl}) => {
 
 export const PlayPauseButton = ({size = iconSizes.xl}) => {
   return (
-    <TouchableOpacity>
+    <TouchableOpacity activeOpacity={0.85}>
       <FontAwesome6
         name={true ? 'pause' : 'play'}
         size={size}
@@ -30,7 +30,7 @@ export const PlayPauseButton = ({size = iconSizes.xl}) => {
 
 export const GotoNextButton = ({size = iconSizes.xl}) => {
     return (
-      <TouchableOpacity>
+      <TouchableOpacity activeOpacity={0.85}>
         <FontAwesome6
           name={'forward-step'}
           size={size}
