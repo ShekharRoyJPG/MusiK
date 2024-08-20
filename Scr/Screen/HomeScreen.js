@@ -3,7 +3,6 @@ import Header from '../../Components/Header';
 import {HomeStyle} from './HomeStyle';
 import React from 'react';
 import {FlatList} from 'react-native';
-import SongCard from '../../Components/SongCard';
 import SongCardWithCategory from '../../Components/SongCardWithCategory';
 import FloatingPlayer from '../../Components/FloatingPlayer';
 export default function () {

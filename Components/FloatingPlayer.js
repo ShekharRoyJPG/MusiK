@@ -39,7 +39,7 @@ const FloatingPlayer = () => {
           {/* <Text style={styles.title}>Always Be</Text> */}
           <MovingText
             text="Always Be"
-            animationThreshold={5}
+            animationThreshold={15}
             style={styles.title}
           />
           <Text style={styles.artist}>Netrum</Text>
