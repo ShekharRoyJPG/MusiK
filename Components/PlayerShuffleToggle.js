@@ -16,6 +16,6 @@ const PlayerShuffleToggle = () => {
   )
 }
 
-export default PlayerShuffleToggle
+export default PlayerShuffleToggle;
 
 const styles = StyleSheet.create({})

@@ -10,6 +10,11 @@ import {useNavigation} from '@react-navigation/native';
 import PlayerRepeatToggle from '../../Components/PlayerRepeatToggle';
 import PlayerShuffleToggle from '../../Components/PlayerShuffleToggle';
 import PlayerProgressBar from '../../Components/PlayerProgressBar';
+import {
+  GotoNextButton,
+  GotoPreviousButton,
+  PlayPauseButton,
+} from '../../Components/PlayerControls';
 const PlayerScreen = () => {
   const navigation = useNavigation();
   const isLiked = false;
@@ -64,7 +69,12 @@ const PlayerScreen = () => {
         </View>
       </View>
       {/* Player progress Bar */}
-       <PlayerProgressBar />
+      <PlayerProgressBar />
+      <View style={styles.playPauseContainer}>
+        <GotoPreviousButton size={iconSizes.xl} />
+        <PlayPauseButton size={iconSizes.xl} />
+        <GotoNextButton size={iconSizes.xl} />
+      </View>
     </SafeAreaView>
   );
 };
@@ -131,5 +141,16 @@ const styles = StyleSheet.create({
   repeatShuffleContainer: {
     flexDirection: 'row',
     gap: spacing.md,
+  },
+  playPauseContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: spacing.xxl,
+    marginTop: spacing.xl,
+    // marginVertical: spacing.lg,
+    // width: '100%',
+    // paddingHorizontal: spacing.lg,
+    // paddingVertical: spacing.sm,
   },
 });
