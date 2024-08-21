@@ -8,6 +8,8 @@ import {fontSize, iconSizes, spacing} from '../Constants/dimensions';
 import {fontFamilies} from '../Constants/fonts';
 import {useNavigation} from '@react-navigation/native';
 import PlayerRepeatToggle from '../../Components/PlayerRepeatToggle';
+import PlayerShuffleToggle from '../../Components/PlayerShuffleToggle';
+import PlayerProgressBar from '../../Components/PlayerProgressBar';
 const PlayerScreen = () => {
   const navigation = useNavigation();
   const isLiked = false;
@@ -49,17 +51,20 @@ const PlayerScreen = () => {
       </View>
       {/* controls  */}
       <View style={styles.playerControlContainer}>
-        <TouchableOpacity>
+        <TouchableOpacity style={styles.volumeWrapper}>
           <Feather
             name={isMute ? 'volume-x' : 'volume-1'}
             color={colors.iconSecondary}
             size={iconSizes.lg}
           />
         </TouchableOpacity>
-        <View>
+        <View style={styles.repeatShuffleContainer}>
           <PlayerRepeatToggle />
+          <PlayerShuffleToggle />
         </View>
       </View>
+      {/* Player progress Bar */}
+       <PlayerProgressBar />
     </SafeAreaView>
   );
 };
@@ -114,5 +119,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  playerControlContainer: {},
+  playerControlContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginVertical: spacing.lg,
+  },
+  volumeWrapper: {
+    flex: 1,
+  },
+  repeatShuffleContainer: {
+    flexDirection: 'row',
+    gap: spacing.md,
+  },
 });

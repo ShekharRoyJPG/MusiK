@@ -3,18 +3,19 @@ import React from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {colors} from '../Scr/Constants/colors';
 import {iconSizes} from '../Scr/Constants/dimensions';
-const PlayerRepeatToggle = () => {
+
+const PlayerShuffleToggle = () => {
   return (
     <TouchableOpacity>
-      <MaterialCommunityIcons
-        name={'repeat'}
-        size={iconSizes.lg}
-        color={colors.iconSecondary}
-      />
-    </TouchableOpacity>
-  );
-};
+    <MaterialCommunityIcons
+      name={'shuffle'}
+      size={iconSizes.lg}
+      color={colors.iconSecondary}
+    />
+  </TouchableOpacity>
+  )
+}
 
-export default PlayerRepeatToggle;
+export default PlayerShuffleToggle
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({})
