@@ -1,8 +1,7 @@
-import {View, Text} from 'react-native';
 import React from 'react';
-import AppNavigation from './AppNavigation/AppNavigation';
+import DrawNavigation from './AppNavigation/DrawNavigation';
 
 const App = () => {
-  return <AppNavigation />;
+  return <DrawNavigation />;
 };
 export default App;
