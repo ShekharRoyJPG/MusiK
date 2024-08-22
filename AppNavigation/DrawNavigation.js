@@ -11,7 +11,7 @@ export default function DrawNavigation() {
     <GestureHandlerRootView style={{flex: 1}}>
       <NavigationContainer>
         <Drawer.Navigator
-          screenOptions={{headerShown: false}}
+          screenOptions={{headerShown: false, drawerType: 'slide'}}
           drawerContent={props => <CustomDrawerContent {...props} />}>
           <Drawer.Screen name="Stack" component={StackNavigation} />
         </Drawer.Navigator>
