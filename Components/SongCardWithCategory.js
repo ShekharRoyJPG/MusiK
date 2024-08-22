@@ -3,13 +3,13 @@ import React from 'react';
 import {spacing} from '../Scr/Constants/dimensions';
 import SongCard from './SongCard';
 import {HomeStyle} from '../Scr/Screen/HomeStyle';
-const SongCardWithCategory = () => {
+const SongCardWithCategory = ({item}) => {
   return (
     <View style={styles.container}>
-      <Text style={HomeStyle.headingText}> Recommended For You</Text>
+      <Text style={HomeStyle.headingText}> {item.title}</Text>
       {/* <SongCard /> */}
       <FlatList
-        data={[1, 2, 3, 4, 5]}
+        data={item.songs}
         renderItem={SongCard}
         horizontal={true}
         ItemSeparatorComponent={<View style={{marginHorizontal: 15}} />}

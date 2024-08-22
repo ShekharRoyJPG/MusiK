@@ -5,12 +5,13 @@ import React from 'react';
 import {FlatList} from 'react-native';
 import SongCardWithCategory from '../../Components/SongCardWithCategory';
 import FloatingPlayer from '../../Components/FloatingPlayer';
+import { songsWithCategory } from '../data/songsWithCategory';
 export default function () {
   return (
     <SafeAreaView style={HomeStyle.container}>
       <Header />
       <FlatList
-        data={[1, 2, 3, 4, 5]}
+        data={songsWithCategory}
         renderItem={SongCardWithCategory}
         contentContainerStyle={{paddingBottom: 400}}
       />
