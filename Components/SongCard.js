@@ -3,13 +3,17 @@ import React from 'react';
 import {colors} from '../Scr/Constants/colors';
 import {fontFamilies} from '../Scr/Constants/fonts';
 import {fontSize, spacing} from '../Scr/Constants/dimensions';
+import TrackPlayer from 'react-native-track-player';
 
-const SongCard = ({item, containerStyle, imageStyle}) => {
-  const imageUrl =
-    'https://linkstorage.linkfire.com/medialinks/images/2bd3689a-7679-4e8b-9f5a-b8b1b73f567d/artwork-440x440.jpg';
+const SongCard = ({item, containerStyle, imageStyle, handlePlay}) => {
   return (
-    <TouchableOpacity style={[styles.container, containerStyle]}>
-      <Image source={{uri: item.artwork}} style={[styles.coverPage, imageStyle]} />
+    <TouchableOpacity
+      onPress={() => handlePlay(item)}
+      style={[styles.container, containerStyle]}>
+      <Image
+        source={{uri: item.artwork}}
+        style={[styles.coverPage, imageStyle]}
+      />
       <Text style={styles.songTitle} numberOfLines={1}>
         {item.title}
       </Text>
