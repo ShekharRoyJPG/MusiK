@@ -17,12 +17,12 @@ const SongCardWithCategory = ({item}) => {
     } // if track doesn't exist
     const beforeSong = Songs.slice(0, trackIndex);
     const afterSong = Songs.slice(trackIndex + 1);
-    // await TrackPlayer.reset();
-    // await TrackPlayer.add(selectedTrack);
-    // await TrackPlayer.add(afterSong);
-    // await TrackPlayer.add(beforeSong);
-    // await TrackPlayer.play();
-    await TrackPlayer.pause();
+    await TrackPlayer.reset();
+    await TrackPlayer.add(selectedTrack);
+    await TrackPlayer.add(afterSong);
+    await TrackPlayer.add(beforeSong);
+    await TrackPlayer.play();
+    // await TrackPlayer.pause();
   };
   return (
     <View style={styles.container}>
