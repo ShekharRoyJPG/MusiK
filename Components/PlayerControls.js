@@ -4,13 +4,16 @@ import {colors} from '../Scr/Constants/colors';
 import {iconSizes} from '../Scr/Constants/dimensions';
 import TrackPlayer from 'react-native-track-player';
 import React from 'react';
-export const GotoPreviousButton = ({size = iconSizes.xl}) => {
-  const backwards = async () => {
+export const GotoPreviousButton = ({size = iconSizes.xl, onTrackChange}) => {
+  const skipToPrevious = async () => {
     await TrackPlayer.skipToPrevious();
+    const currentTrack = await TrackPlayer.getCurrentTrack();
+    const track = await TrackPlayer.getTrack(currentTrack);
+    onTrackChange(track); // Update current song after skipping
   };
 
   return (
-    <TouchableOpacity onPress={backwards} activeOpacity={0.85}>
+    <TouchableOpacity onPress={skipToPrevious} activeOpacity={0.85}>
       <FontAwesome6
         name={'backward-step'}
         size={size}
@@ -21,7 +24,7 @@ export const GotoPreviousButton = ({size = iconSizes.xl}) => {
 };
 
 export const PlayPauseButton = ({size = iconSizes.xl}) => {
-  const [playmode, setPlaymode] = React.useState(false);
+  const [playmode, setPlaymode] = React.useState(true);
 
   const togglePlayPause = async () => {
     if (playmode) {
@@ -43,12 +46,16 @@ export const PlayPauseButton = ({size = iconSizes.xl}) => {
   );
 };
 
-export const GotoNextButton = ({size = iconSizes.xl}) => {
-  const forwards = async () => {
+export const GotoNextButton = ({size = iconSizes.xl, onTrackChange}) => {
+  const skipToNext = async () => {
     await TrackPlayer.skipToNext();
+    const currentTrack = await TrackPlayer.getCurrentTrack();
+    const track = await TrackPlayer.getTrack(currentTrack);
+    onTrackChange(track); // Update current song after skipping
   };
+
   return (
-    <TouchableOpacity onPress={forwards} activeOpacity={0.85}>
+    <TouchableOpacity onPress={skipToNext} activeOpacity={0.85}>
       <FontAwesome6
         name={'forward-step'}
         size={size}

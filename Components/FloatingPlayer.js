@@ -15,7 +15,7 @@ import MovingText from './MovingText';
 
 const ImageUrl =
   'https://linkstorage.linkfire.com/medialinks/images/9ff1e498-61dd-4a27-9854-79b3342f4bca/artwork-440x440.jpg';
-const FloatingPlayer = () => {
+const FloatingPlayer = ({song}) => {
   const {position, duration} = useProgress(250);
   const progressPercentage = duration > 0 ? (position / duration) * 100 : 0;
   const isSliding = useSharedValue(false);
@@ -23,11 +23,22 @@ const FloatingPlayer = () => {
   const min = useSharedValue(0);
   const max = useSharedValue(100);
   // Update progress value smoothly when position changes
+
   React.useEffect(() => {
     if (!isSliding.value) {
       progress.value = withSpring(progressPercentage);
     }
   }, [position, duration, isSliding.value, progress, progressPercentage]);
+  React.useEffect(() => {
+    if (song) {
+      // Optionally handle any side effects when the song changes
+      console.log('Song changed:', song.title);
+    }
+  }, [song]);
+
+  if (!song) {
+    return null; // Don't render if no song is selected
+  }
   return (
     <View>
       <View style={{zIndex: 1}}>
@@ -62,20 +73,26 @@ const FloatingPlayer = () => {
         />
       </View>
       <TouchableOpacity style={styles.container} activeOpacity={0.85}>
-        <Image source={{uri: ImageUrl}} style={styles.coverImage} />
+        <Image source={{uri: song.artwork}} style={styles.coverImage} />
         <View style={styles.titleContainer}>
           {/* <Text style={styles.title}>Always Be</Text> */}
           <MovingText
-            text="Always Be"
+            text={song.title}
             animationThreshold={15}
             style={styles.title}
           />
-          <Text style={styles.artist}>Netrum</Text>
+          <Text style={styles.artist}>{song.artist}</Text>
         </View>
         <View style={styles.playerControlContainer}>
-          <GotoPreviousButton size={iconSizes.md} />
+          <GotoPreviousButton
+            size={iconSizes.md}
+            onTrackChange={track => (song = track)}
+          />
           <PlayPauseButton size={iconSizes.md} />
-          <GotoNextButton size={iconSizes.md} />
+          <GotoNextButton
+            size={iconSizes.md}
+            onTrackChange={track => (song = track)}
+          />
         </View>
       </TouchableOpacity>
     </View>
@@ -113,7 +130,8 @@ const styles = StyleSheet.create({
   playerControlContainer: {
     flexDirection: 'row',
     alignContent: 'center',
-    gap: 20,
+    gap: 30,
+    // justifyContent: 'space-between',
     paddingRight: spacing.lg,
   },
 });

@@ -4,7 +4,7 @@ import {spacing} from '../Scr/Constants/dimensions';
 import SongCard from './SongCard';
 import {HomeStyle} from '../Scr/Screen/HomeStyle';
 import TrackPlayer from 'react-native-track-player';
-const SongCardWithCategory = ({item}) => {
+const SongCardWithCategory = ({item, onPlay}) => {
   // create a function that will play a song in queue
   const handlePlayTrack = async selectedTrack => {
     // console.log(selectedTrack);
@@ -23,6 +23,7 @@ const SongCardWithCategory = ({item}) => {
     await TrackPlayer.add(beforeSong);
     await TrackPlayer.play();
     // await TrackPlayer.pause();
+    onPlay(selectedTrack); // Update current song
   };
   return (
     <View style={styles.container}>

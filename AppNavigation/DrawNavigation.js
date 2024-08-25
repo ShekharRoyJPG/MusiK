@@ -5,13 +5,13 @@ import {NavigationContainer} from '@react-navigation/native';
 import StackNavigation from './StackNavigation';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import CustomDrawerContent from './CustomDrawerContent';
-import TrackPlayer from 'react-native-track-player';
 import {useSetupPlayer} from '../hook/useSetupTrackPlayer';
 export default function DrawNavigation() {
-  const onLoad = () => {
-    console.log('onLoad');
+  const handlePlayerLoaded = () => {
+    console.log('TrackPlayer is ready!');
   };
-  useSetupPlayer({onLoad});
+
+  useSetupPlayer({onLoad: handlePlayerLoaded});
   const Drawer = createDrawerNavigator();
   return (
     <GestureHandlerRootView style={{flex: 1}}>
