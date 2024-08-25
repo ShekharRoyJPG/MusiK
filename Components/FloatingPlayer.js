@@ -36,7 +36,7 @@ const FloatingPlayer = () => {
           progress={progress}
           minimumValue={min}
           maximumValue={max}
-          thumbWidth={25}
+          // thumbWidth={25}
           theme={{
             maximumTrackTintColor: colors.maxTrackTintColor,
             minimumTrackTintColor: colors.minTrackTintColor,

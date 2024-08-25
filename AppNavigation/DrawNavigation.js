@@ -6,19 +6,22 @@ import StackNavigation from './StackNavigation';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import CustomDrawerContent from './CustomDrawerContent';
 import TrackPlayer from 'react-native-track-player';
+import {useSetupPlayer} from '../hook/useSetupTrackPlayer';
 export default function DrawNavigation() {
-  useEffect(() => {
-    setupPlayer();
-  }, []);
-  const setupPlayer = async () => {
-    await TrackPlayer.setupPlayer();
+  const onLoad = () => {
+    console.log('onLoad');
   };
+  useSetupPlayer({onLoad});
   const Drawer = createDrawerNavigator();
   return (
     <GestureHandlerRootView style={{flex: 1}}>
       <NavigationContainer>
         <Drawer.Navigator
-          screenOptions={{headerShown: false, drawerType: 'slide'}}
+          screenOptions={{
+            headerShown: false,
+            drawerType: 'slide',
+            swipeEdgeWidth: 0,
+          }}
           drawerContent={props => <CustomDrawerContent {...props} />}>
           <Drawer.Screen name="Stack" component={StackNavigation} />
         </Drawer.Navigator>
