@@ -12,10 +12,10 @@ import {
 import {useSharedValue, withSpring} from 'react-native-reanimated';
 import {Slider} from 'react-native-awesome-slider';
 import MovingText from './MovingText';
+import {useNavigation} from '@react-navigation/native';
 
-const ImageUrl =
-  'https://linkstorage.linkfire.com/medialinks/images/9ff1e498-61dd-4a27-9854-79b3342f4bca/artwork-440x440.jpg';
 const FloatingPlayer = ({song}) => {
+  const navigation = useNavigation();
   const {position, duration} = useProgress(250);
   const progressPercentage = duration > 0 ? (position / duration) * 100 : 0;
   const isSliding = useSharedValue(false);
@@ -29,12 +29,6 @@ const FloatingPlayer = ({song}) => {
       progress.value = withSpring(progressPercentage);
     }
   }, [position, duration, isSliding.value, progress, progressPercentage]);
-  React.useEffect(() => {
-    if (song) {
-      // Optionally handle any side effects when the song changes
-      console.log('Song changed:', song.title);
-    }
-  }, [song]);
 
   if (!song) {
     return null; // Don't render if no song is selected
@@ -72,7 +66,10 @@ const FloatingPlayer = ({song}) => {
           }}
         />
       </View>
-      <TouchableOpacity style={styles.container} activeOpacity={0.85}>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('Player', {song})}
+        style={styles.container}
+        activeOpacity={0.85}>
         <Image source={{uri: song.artwork}} style={styles.coverImage} />
         <View style={styles.titleContainer}>
           {/* <Text style={styles.title}>Always Be</Text> */}

@@ -1,12 +1,17 @@
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 import {colors} from '../Constants/colors';
 import {fontSize, iconSizes, spacing} from '../Constants/dimensions';
 import {fontFamilies} from '../Constants/fonts';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
+import TrackPlayer, {
+  useTrackPlayerEvents,
+  Event,
+  useProgress,
+} from 'react-native-track-player';
 import PlayerRepeatToggle from '../../Components/PlayerRepeatToggle';
 import PlayerShuffleToggle from '../../Components/PlayerShuffleToggle';
 import PlayerProgressBar from '../../Components/PlayerProgressBar';
@@ -15,15 +20,34 @@ import {
   GotoPreviousButton,
   PlayPauseButton,
 } from '../../Components/PlayerControls';
+
 const PlayerScreen = () => {
   const navigation = useNavigation();
-  const isLiked = false;
-  const isMute = false;
-  const imageUrl =
-    'https://linkstorage.linkfire.com/medialinks/images/2bd3689a-7679-4e8b-9f5a-b8b1b73f567d/artwork-440x440.jpg';
+  const route = useRoute();
+  const [currentSong, setCurrentSong] = useState(route.params?.song || null);
+  const [isLiked, setIsLiked] = useState(false);
+  const [isMute, setIsMute] = useState(false);
+
+  // Handle track changes
+  useTrackPlayerEvents([Event.PlaybackTrackChanged], async event => {
+    if (event.type === Event.PlaybackTrackChanged) {
+      const track = await TrackPlayer.getTrack(event.nextTrack);
+      if (track) {
+        setCurrentSong(track);
+      }
+    }
+  });
+
+  // useEffect(() => {
+  //   if (currentSong) {
+  //     // Optionally handle any side effects when the song changes
+  //     console.log('Current song:', currentSong.title);
+  //   }
+  // }, [currentSong]);
+
   return (
     <SafeAreaView style={styles.container}>
-      {/* header */}
+      {/* Header */}
       <View style={styles.headerContainer}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <AntDesign
@@ -34,29 +58,36 @@ const PlayerScreen = () => {
         </TouchableOpacity>
         <Text style={styles.headerText}>Playing Now</Text>
       </View>
-      {/* image */}
-      <View style={styles.coverImageContainer}>
-        <Image source={{uri: imageUrl}} style={styles.coverImage} />
-      </View>
-      {/* render the title and artist */}
-      <View style={styles.titleRowHeartContainer}>
-        {/* title row container */}
-        <View style={styles.titleContainer}>
-          <Text style={styles.title}>On & On (feat. Daniel Levi)</Text>
-          <Text style={styles.artist}>Alan Walker</Text>
-        </View>
-        {/* icon container */}
-        <TouchableOpacity>
-          <AntDesign
-            name={isLiked ? 'heart' : 'hearto'}
-            color={colors.iconSecondary}
-            size={iconSizes.md}
+      {/* Image */}
+      {currentSong && (
+        <View style={styles.coverImageContainer}>
+          <Image
+            source={{uri: currentSong.artwork}}
+            style={styles.coverImage}
           />
-        </TouchableOpacity>
-      </View>
-      {/* controls  */}
+        </View>
+      )}
+      {/* Title and artist */}
+      {currentSong && (
+        <View style={styles.titleRowHeartContainer}>
+          <View style={styles.titleContainer}>
+            <Text style={styles.title}>{currentSong.title}</Text>
+            <Text style={styles.artist}>{currentSong.artist}</Text>
+          </View>
+          <TouchableOpacity onPress={() => setIsLiked(!isLiked)}>
+            <AntDesign
+              name={isLiked ? 'heart' : 'hearto'}
+              color={colors.iconSecondary}
+              size={iconSizes.md}
+            />
+          </TouchableOpacity>
+        </View>
+      )}
+      {/* Controls */}
       <View style={styles.playerControlContainer}>
-        <TouchableOpacity style={styles.volumeWrapper}>
+        <TouchableOpacity
+          style={styles.volumeWrapper}
+          onPress={() => setIsMute(!isMute)}>
           <Feather
             name={isMute ? 'volume-x' : 'volume-1'}
             color={colors.iconSecondary}
@@ -68,12 +99,18 @@ const PlayerScreen = () => {
           <PlayerShuffleToggle />
         </View>
       </View>
-      {/* Player progress Bar */}
-      <PlayerProgressBar />
+      {/* Player Progress Bar */}
+      <PlayerProgressBar currentSong={currentSong} />
       <View style={styles.playPauseContainer}>
-        <GotoPreviousButton size={iconSizes.xl} />
+        <GotoPreviousButton
+          size={iconSizes.xl}
+          onTrackChange={track => setCurrentSong(track)}
+        />
         <PlayPauseButton size={iconSizes.xl} />
-        <GotoNextButton size={iconSizes.xl} />
+        <GotoNextButton
+          size={iconSizes.xl}
+          onTrackChange={track => setCurrentSong(track)}
+        />
       </View>
     </SafeAreaView>
   );
