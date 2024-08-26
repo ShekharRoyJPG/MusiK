@@ -24,14 +24,14 @@ export const GotoPreviousButton = ({size = iconSizes.xl, onTrackChange}) => {
 };
 
 export const PlayPauseButton = ({size = iconSizes.xl}) => {
-  const [playmode, setPlaymode] = React.useState(false);
+  const [playmode, setPlaymode] = React.useState(null);
   const setIcon = async () => {
     const state = await TrackPlayer.getState();
     setPlaymode(state === State.Playing ? true : false);
   };
   React.useEffect(() => {
     setIcon();
-  }, []);
+  }, [playmode]);
 
   const togglePlayPause = async () => {
     if (playmode) {
