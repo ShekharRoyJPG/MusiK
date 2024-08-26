@@ -2,7 +2,7 @@ import {TouchableOpacity} from 'react-native';
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import {colors} from '../Scr/Constants/colors';
 import {iconSizes} from '../Scr/Constants/dimensions';
-import TrackPlayer from 'react-native-track-player';
+import TrackPlayer, {State} from 'react-native-track-player';
 import React from 'react';
 export const GotoPreviousButton = ({size = iconSizes.xl, onTrackChange}) => {
   const skipToPrevious = async () => {
@@ -24,7 +24,14 @@ export const GotoPreviousButton = ({size = iconSizes.xl, onTrackChange}) => {
 };
 
 export const PlayPauseButton = ({size = iconSizes.xl}) => {
-  const [playmode, setPlaymode] = React.useState(true);
+  const [playmode, setPlaymode] = React.useState(false);
+  const setIcon = async () => {
+    const state = await TrackPlayer.getState();
+    setPlaymode(state === State.Playing ? true : false);
+  };
+  React.useEffect(() => {
+    setIcon();
+  }, []);
 
   const togglePlayPause = async () => {
     if (playmode) {

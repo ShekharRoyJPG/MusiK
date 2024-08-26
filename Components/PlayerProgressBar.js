@@ -7,7 +7,8 @@ import {colors} from '../Scr/Constants/colors';
 import {fontFamilies} from '../Scr/Constants/fonts';
 import {fontSize, spacing} from '../Scr/Constants/dimensions';
 
-const PlayerProgressBar = ({currentSong}) => {
+// const PlayerProgressBar = ({currentSong}) => {
+const PlayerProgressBar = () => {
   const {position, duration} = useProgress();
   const progress = useSharedValue((position / duration) * 100 || 0);
   const min = useSharedValue(0);

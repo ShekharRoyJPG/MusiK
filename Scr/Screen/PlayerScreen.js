@@ -28,6 +28,13 @@ const PlayerScreen = () => {
   const [isLiked, setIsLiked] = useState(false);
   const [isMute, setIsMute] = useState(false);
 
+  const setVolume = async () => {
+    const volume = await TrackPlayer.getVolume();
+    setIsMute(volume === 0 ? true : false);
+  };
+  useEffect(() => {
+    setVolume();
+  }, []);
   // Handle track changes
   useTrackPlayerEvents([Event.PlaybackTrackChanged], async event => {
     if (event.type === Event.PlaybackTrackChanged) {
@@ -97,7 +104,8 @@ const PlayerScreen = () => {
         </View>
       </View>
       {/* Player Progress Bar */}
-      <PlayerProgressBar currentSong={currentSong} />
+      {/* <PlayerProgressBar currentSong={currentSong} /> */}
+      <PlayerProgressBar />
       <View style={styles.playPauseContainer}>
         <GotoPreviousButton
           size={iconSizes.xl}
