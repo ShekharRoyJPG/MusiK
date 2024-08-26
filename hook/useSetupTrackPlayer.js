@@ -31,7 +31,7 @@ const setupPlayer = async () => {
         Capability.Pause,
         Capability.SkipToNext,
         Capability.SkipToPrevious,
-        Capability.Stop,
+        // Capability.Stop,
       ],
     });
 

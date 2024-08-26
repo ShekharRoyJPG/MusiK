@@ -37,13 +37,10 @@ const PlayerScreen = () => {
       }
     }
   });
-
-  // useEffect(() => {
-  //   if (currentSong) {
-  //     // Optionally handle any side effects when the song changes
-  //     console.log('Current song:', currentSong.title);
-  //   }
-  // }, [currentSong]);
+  const handleToggleVolume = () => {
+    TrackPlayer.setVolume(isMute ? 1 : 0);
+    setIsMute(!isMute);
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -87,7 +84,7 @@ const PlayerScreen = () => {
       <View style={styles.playerControlContainer}>
         <TouchableOpacity
           style={styles.volumeWrapper}
-          onPress={() => setIsMute(!isMute)}>
+          onPress={handleToggleVolume}>
           <Feather
             name={isMute ? 'volume-x' : 'volume-1'}
             color={colors.iconSecondary}

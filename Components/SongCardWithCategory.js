@@ -22,6 +22,7 @@ const SongCardWithCategory = ({item, onPlay}) => {
     await TrackPlayer.add(afterSong);
     await TrackPlayer.add(beforeSong);
     await TrackPlayer.play();
+    // await TrackPlayer.setRate(1);// play back speed up by default 1
     // await TrackPlayer.pause();
     onPlay(selectedTrack); // Update current song
   };

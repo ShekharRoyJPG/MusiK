@@ -1,10 +1,10 @@
 export const recommendedSongs = [
   {
-    url: 'https://yqzxlndznmsoyhlzwyaa.supabase.co/storage/v1/object/public/ncs/On_And_On.mp3',
-    title: 'On & On (feat. Daniel Levi)',
-    artist: 'Cartoon, Daniel Levi, Jéja',
+    url: 'https://yqzxlndznmsoyhlzwyaa.supabase.co/storage/v1/object/public/ncs/Tu_Har_Lamha.mp3',
+    title: 'Tu Har Lamha',
+    artist: 'Arijit Singh',
     artwork:
-      'https://linkstorage.linkfire.com/medialinks/images/2bd3689a-7679-4e8b-9f5a-b8b1b73f567d/artwork-440x440.jpg',
+      'https://pagalfree.com/images/128Tu%20Har%20Lamha%20-%20Khamoshiyan%20128%20Kbps.jpg',
   },
   {
     url: 'https://yqzxlndznmsoyhlzwyaa.supabase.co/storage/v1/object/public/ncs/Royalty.mp3',
@@ -21,11 +21,11 @@ export const recommendedSongs = [
       'https://linkstorage.linkfire.com/medialinks/images/2428851f-c910-4a82-953b-63cfa1a5134e/artwork-440x440.jpg',
   },
   {
-    url: 'https://yqzxlndznmsoyhlzwyaa.supabase.co/storage/v1/object/public/ncs/Cradles.mp3',
-    title: 'Cradles',
-    artist: 'Sub Urban',
+    url: 'https://yqzxlndznmsoyhlzwyaa.supabase.co/storage/v1/object/public/ncs/Mat_Aazma_Re.mp3',
+    title: 'Mat Azma Re',
+    artist: 'KK',
     artwork:
-      'https://linkstorage.linkfire.com/medialinks/images/2246d2a2-05d6-402f-b4e6-1f55c1780a50/artwork-440x440.jpg',
+      'https://c.saavncdn.com/947/Mat-Aazma-Re-Hindi-2013-20200630075752-500x500.jpg',
   },
   {
     url: 'https://yqzxlndznmsoyhlzwyaa.supabase.co/storage/v1/object/public/ncs/Suffer_With_Me.mp3',
