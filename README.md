@@ -1,6 +1,6 @@
 # MusiK 🎵
 
-MusiK is a React Native music player application that allows users to play, pause, shuffle, and control music tracks with ease. The app is built using `react-native-track-player` for seamless audio playback and provides a rich user experience with custom components like `FloatingPlayer` and `PlayerShuffleToggle`.
+MusiK is a React Native music player application that allows users to play, pause, shuffle, and control music tracks with ease. The app is built using `react-native-track-player` for seamless audio playback and provides a rich user experience with robust audio playback capabilities, supporting a range of user interactions and custom controls.
 
 ## Features
 
