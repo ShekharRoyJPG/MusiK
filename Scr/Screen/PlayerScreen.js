@@ -21,6 +21,7 @@ import {
   PlayPauseButton,
 } from '../../Components/PlayerControls';
 import {useLikeSongs} from '../store/likeStore';
+import {isExist} from '../data/Check';
 
 const PlayerScreen = () => {
   const {likedSongs, addToLiked} = useLikeSongs();
@@ -36,7 +37,14 @@ const PlayerScreen = () => {
   };
   useEffect(() => {
     setVolume();
-  }, []);
+    // const isSongLiked = likedSongs.some(item => currentSong.url === item.url);
+    const isSongLiked = isExist(likedSongs, currentSong);
+    if (isSongLiked) {
+      setIsLiked(true);
+    } else {
+      setIsLiked(false);
+    }
+  }, [likedSongs, currentSong]);
   // Handle track changes
   useTrackPlayerEvents([Event.PlaybackTrackChanged], async event => {
     if (event.type === Event.PlaybackTrackChanged) {

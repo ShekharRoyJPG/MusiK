@@ -8,7 +8,7 @@ export const useLikeSongs = create(set => ({
     set(state => {
       let alreadyExist = isExist(state.likedSongs, newSong);
       const updatedSong = alreadyExist
-        ? state.likedSongs
+        ? state.likedSongs.filter(item => item.url !== newSong.url)
         : [newSong, ...state.likedSongs];
       AsyncStorage.setItem('likedSongs', JSON.stringify(updatedSong));
       return {

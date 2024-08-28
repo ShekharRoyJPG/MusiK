@@ -9,9 +9,31 @@ import {fontFamilies} from '../Constants/fonts';
 import SongCard from '../../Components/SongCard';
 import {useNavigation} from '@react-navigation/native';
 import {useLikeSongs} from '../store/likeStore';
+import TrackPlayer from 'react-native-track-player';
 const LikeScreen = () => {
   const navigation = useNavigation();
   const {likedSongs} = useLikeSongs();
+  const track = TrackPlayer.getActiveTrack();
+  console.log(track);
+  const handlePlayTrack = async selectedTrack => {
+    // console.log(selectedTrack);
+    const Songs = likedSongs;
+    const trackIndex = Songs.findIndex(
+      track => track.url === selectedTrack.url,
+    );
+    if (trackIndex === -1) {
+      return;
+    } // if track doesn't exist
+    const beforeSong = Songs.slice(0, trackIndex);
+    const afterSong = Songs.slice(trackIndex + 1);
+    await TrackPlayer.reset();
+    await TrackPlayer.add(selectedTrack);
+    await TrackPlayer.add(afterSong);
+    await TrackPlayer.add(beforeSong);
+    await TrackPlayer.play();
+    // await TrackPlayer.setRate(1);// play back speed up by default 1
+    // await TrackPlayer.pause();
+  };
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.headerContainer}>
@@ -40,6 +62,9 @@ const LikeScreen = () => {
             containerStyle={{width: '47%'}}
             imageStyle={{height: 160, width: 160}}
             item={item}
+            handlePlay={() => {
+              handlePlayTrack(item);
+            }}
           />
         )}
         numColumns={2}
