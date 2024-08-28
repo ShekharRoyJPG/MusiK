@@ -7,11 +7,15 @@ import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import {fontSize, iconSizes, spacing} from '../Constants/dimensions';
 import {fontFamilies} from '../Constants/fonts';
 import SongCard from '../../Components/SongCard';
+import {useNavigation} from '@react-navigation/native';
+import {useLikeSongs} from '../store/likeStore';
 const LikeScreen = () => {
+  const navigation = useNavigation();
+  const {likedSongs} = useLikeSongs();
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.headerContainer}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
           <AntDesign
             name="arrowleft"
             size={iconSizes.md}
@@ -30,11 +34,12 @@ const LikeScreen = () => {
         ListHeaderComponent={
           <Text style={styles.headingText}>Liked Songs</Text>
         }
-        data={[1, 2, 3, 4, 5, 6, 7, 8, 9]}
-        renderItem={() => (
+        data={likedSongs}
+        renderItem={({item}) => (
           <SongCard
             containerStyle={{width: '47%'}}
             imageStyle={{height: 160, width: 160}}
+            item={item}
           />
         )}
         numColumns={2}

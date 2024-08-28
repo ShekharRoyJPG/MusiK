@@ -20,8 +20,10 @@ import {
   GotoPreviousButton,
   PlayPauseButton,
 } from '../../Components/PlayerControls';
+import {useLikeSongs} from '../store/likeStore';
 
 const PlayerScreen = () => {
+  const {likedSongs, addToLiked} = useLikeSongs();
   const navigation = useNavigation();
   const route = useRoute();
   const [currentSong, setCurrentSong] = useState(route.params?.song || null);
@@ -78,7 +80,11 @@ const PlayerScreen = () => {
             <Text style={styles.title}>{currentSong.title}</Text>
             <Text style={styles.artist}>{currentSong.artist}</Text>
           </View>
-          <TouchableOpacity onPress={() => setIsLiked(!isLiked)}>
+          <TouchableOpacity
+            onPress={() => {
+              setIsLiked(!isLiked);
+              addToLiked(currentSong);
+            }}>
             <AntDesign
               name={isLiked ? 'heart' : 'hearto'}
               color={colors.iconSecondary}
