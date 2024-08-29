@@ -9,7 +9,7 @@ export const recommendedSongs = [
   {
     url: 'https://yqzxlndznmsoyhlzwyaa.supabase.co/storage/v1/object/public/ncs/Royalty.mp3',
     title: 'Royalty',
-    artist: 'Maestro Chives, Egzod, Neoni',
+    artist: 'Maestro Chives',
     artwork:
       'https://linkstorage.linkfire.com/medialinks/images/374fc4ba-fe39-4bcf-9cf0-74c87c879ed0/artwork-440x440.jpg',
   },
@@ -26,6 +26,13 @@ export const recommendedSongs = [
     artist: 'KK',
     artwork:
       'https://c.saavncdn.com/947/Mat-Aazma-Re-Hindi-2013-20200630075752-500x500.jpg',
+  },
+  {
+    url: 'https://yqzxlndznmsoyhlzwyaa.supabase.co/storage/v1/object/public/ncs/Suffer_With_Me.mp3',
+    title: 'Suffer With Me',
+    artist: 'líue',
+    artwork:
+      'https://i1.sndcdn.com/artworks-yDfR3Cg1pLHhy77y-mzz9JQ-t500x500.jpg',
   },
   {
     url: 'https://yqzxlndznmsoyhlzwyaa.supabase.co/storage/v1/object/public/ncs/Suffer_With_Me.mp3',

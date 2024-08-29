@@ -5,12 +5,14 @@ export const songsWithCategory = [
     title: 'Recommended for you',
     songs: recommendedSongs,
   },
+];
+export const ShortSongsWithCategory = [
   {
-    title: 'New Releases',
+    title: 'EverGreen Song',
     songs: recommendedSongs,
   },
   {
-    title: 'NCS',
+    title: 'All time Best',
     songs: recommendedSongs,
   },
 ];

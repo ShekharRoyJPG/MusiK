@@ -4,7 +4,8 @@ import {spacing} from '../Scr/Constants/dimensions';
 import SongCard from './SongCard';
 import {HomeStyle} from '../Scr/Screen/HomeStyle';
 import TrackPlayer from 'react-native-track-player';
-const SongCardWithCategory = ({item, onPlay}) => {
+const ShortsCardwithCategory = ({item, onPlay}) => {
+    // const [headerName, setHeaderName] = React.useState("");
   // create a function that will play a song in queue
   const handlePlayTrack = async selectedTrack => {
     // console.log(selectedTrack);
@@ -28,7 +29,7 @@ const SongCardWithCategory = ({item, onPlay}) => {
   };
   return (
     <View style={styles.container}>
-      <Text style={HomeStyle.headingText}> {item.title}</Text>
+      <Text style={HomeStyle.headingText}>{item.title}</Text>
       {/* <SongCard /> */}
       <FlatList
         data={item.songs}
@@ -38,21 +39,38 @@ const SongCardWithCategory = ({item, onPlay}) => {
             handlePlay={selectedTrack => {
               handlePlayTrack(selectedTrack);
             }}
+            containerStyle={styles.containerStyle}
+            imageStyle={styles.imageStyle}
           />
         )}
-        horizontal={true}
-        // ItemSeparatorComponent={<View style={{marginHorizontal: 2}}
-        // />}
-        // contentContainerStyle={{paddingHorizontal: spacing.md}}
+        // horizontal={true}
+        numColumns={2}
+        columnWrapperStyle={{
+          marginVertical: spacing.sm,
+        }}
+        
       />
     </View>
   );
 };
 
-export default SongCardWithCategory;
+export default ShortsCardwithCategory;
 
 const styles = StyleSheet.create({
-  container: {
+  containerStyle: {
+    flexDirection: 'row',
+    height: 80,
+    width: 250,
     flex: 1,
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    // borderColor: 'white',
+    // borderWidth: 2,
+  },
+  imageStyle: {
+    width: 80,
+    height: 80,
+    borderRadius: 10,
+
   },
 });
