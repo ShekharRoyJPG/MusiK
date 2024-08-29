@@ -24,8 +24,8 @@ export default function Home() {
   return (
     <SafeAreaView style={HomeStyle.container}>
       <Header />
-      <ScrollView>
         <ArtistCard />
+      <ScrollView>
         <FlatList
           data={songsWithCategory}
           renderItem={({item}) => (

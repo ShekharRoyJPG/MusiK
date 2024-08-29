@@ -1,5 +1,11 @@
 export const recommendedSongs = [
   {
+    url: 'https://yqzxlndznmsoyhlzwyaa.supabase.co/storage/v1/object/public/ncs/Phir%20Mujhe%20Dil%20Se%20Pukar%20Tu_320(PagalWorld.com.so).mp3',
+    title: 'Phir Mujhe Dil',
+    artist: 'Mohit Gaur',
+    artwork: 'https://www.pagalworld.com.so/uploads/thumb/sft29/14096_4.jpg',
+  },
+  {
     url: 'https://yqzxlndznmsoyhlzwyaa.supabase.co/storage/v1/object/public/ncs/Tu_Har_Lamha.mp3',
     title: 'Tu Har Lamha',
     artist: 'Arijit Singh',
@@ -26,13 +32,6 @@ export const recommendedSongs = [
     artist: 'KK',
     artwork:
       'https://c.saavncdn.com/947/Mat-Aazma-Re-Hindi-2013-20200630075752-500x500.jpg',
-  },
-  {
-    url: 'https://yqzxlndznmsoyhlzwyaa.supabase.co/storage/v1/object/public/ncs/Suffer_With_Me.mp3',
-    title: 'Suffer With Me',
-    artist: 'líue',
-    artwork:
-      'https://i1.sndcdn.com/artworks-yDfR3Cg1pLHhy77y-mzz9JQ-t500x500.jpg',
   },
   {
     url: 'https://yqzxlndznmsoyhlzwyaa.supabase.co/storage/v1/object/public/ncs/Suffer_With_Me.mp3',
