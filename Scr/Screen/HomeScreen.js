@@ -5,14 +5,27 @@ import React from 'react';
 import {FlatList, ScrollView} from 'react-native';
 import SongCardWithCategory from '../../Components/SongCardWithCategory';
 import FloatingPlayer from '../../Components/FloatingPlayer';
-import {ShortSongsWithCategory, songsWithCategory} from '../data/songsWithCategory';
+import {
+  ShortSongsWithCategory,
+  songsWithCategory,
+} from '../data/songsWithCategory';
 import TrackPlayer, {
   Event,
   useTrackPlayerEvents,
 } from 'react-native-track-player';
 import ArtistCard from '../../Components/ArtistCard';
 import ShortsCardwithCategory from '../../Components/ShortsCardwithCategory';
+import {useSetupPlayer} from '../../hook/useSetupTrackPlayer';
+import {useLikeSongs} from '../store/likeStore';
 export default function Home() {
+  const {loadLikedSongs} = useLikeSongs();
+  const handlePlayerLoaded = () => {
+    console.log('TrackPlayer is ready!');
+    loadLikedSongs(); // Load initial songs like data when player is ready.
+  };
+
+  useSetupPlayer({onLoad: handlePlayerLoaded});
+
   const [currentSong, setCurrentSong] = React.useState(null);
   // Update currentSong when track changes
   useTrackPlayerEvents([Event.PlaybackTrackChanged], async event => {
@@ -24,7 +37,7 @@ export default function Home() {
   return (
     <SafeAreaView style={HomeStyle.container}>
       <Header />
-        <ArtistCard />
+      <ArtistCard />
       <ScrollView>
         <FlatList
           data={songsWithCategory}

@@ -10,13 +10,16 @@ import Artist from './Artist';
 export default function ArtistCard() {
   return (
     <View style={styles.container}>
-      <Text style={styles.headingText}>Artists </Text>
+      <Text style={styles.headingText}>Singers</Text>
       <FlatList
         data={Artists}
         renderItem={({item}) => <Artist item={item} />}
         horizontal={true}
         ItemSeparatorComponent={<View style={{marginHorizontal: 5}} />}
-        contentContainerStyle={{paddingHorizontal: spacing.md, marginVertical: spacing.sm}}
+        contentContainerStyle={{
+          paddingHorizontal: spacing.md,
+          marginVertical: spacing.sm,
+        }}
       />
     </View>
   );

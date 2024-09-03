@@ -5,16 +5,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import StackNavigation from './StackNavigation';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import CustomDrawerContent from './CustomDrawerContent';
-import {useSetupPlayer} from '../hook/useSetupTrackPlayer';
-import {useLikeSongs} from '../Scr/store/likeStore';
 export default function DrawNavigation() {
-  const {loadLikedSongs} = useLikeSongs();
-  const handlePlayerLoaded = () => {
-    console.log('TrackPlayer is ready!');
-    loadLikedSongs(); // Load initial songs like data when player is ready.
-  };
-
-  useSetupPlayer({onLoad: handlePlayerLoaded});
   const Drawer = createDrawerNavigator();
   return (
     <GestureHandlerRootView style={{flex: 1}}>

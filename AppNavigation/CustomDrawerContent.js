@@ -12,13 +12,26 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Octicons from 'react-native-vector-icons/Octicons';
 import {useNavigation} from '@react-navigation/native';
 import {fontFamilies} from '../Scr/Constants/fonts';
+import {signOut} from 'firebase/auth';
+import {auth} from '../Firebase/config';
 
 const CustomDrawerContent = props => {
   const isDarkMode = true;
+  const handleSignOut = async () => {
+    await signOut(auth);
+    props.navigation.closeDrawer();
+  };
   return (
     <DrawerContentScrollView style={styles.container}>
       {/* <DrawerItemList {...props} /> */}
       <View style={styles.headerIconContainer}>
+      <TouchableOpacity>
+          <Octicons
+            name={isDarkMode ? 'sun' : 'moon'}
+            size={iconSizes.lg}
+            color={colors.iconPrimary}
+          />
+        </TouchableOpacity>
         <TouchableOpacity onPress={() => props.navigation.closeDrawer()}>
           <AntDesign
             name="close"
@@ -26,13 +39,7 @@ const CustomDrawerContent = props => {
             color={colors.iconPrimary}
           />
         </TouchableOpacity>
-        <TouchableOpacity>
-          <Octicons
-            name={isDarkMode ? 'sun' : 'moon'}
-            size={iconSizes.lg}
-            color={colors.iconPrimary}
-          />
-        </TouchableOpacity>
+        
       </View>
       {/* drawer items */}
       <View style={styles.drawerItemContainer}>
@@ -112,6 +119,19 @@ const CustomDrawerContent = props => {
           labelStyle={styles.labelStyle}
           style={styles.drawerItem}
           onPress={() => props.navigation.navigate('Like')}
+        />
+        <DrawerItem
+          label={'Sign Out'}
+          icon={() => (
+            <FontAwesome
+              name="sign-out"
+              size={iconSizes.md}
+              color={colors.iconSecondary}
+            />
+          )}
+          labelStyle={styles.labelStyle}
+          style={styles.drawerItem}
+          onPress={handleSignOut}
         />
       </View>
     </DrawerContentScrollView>
