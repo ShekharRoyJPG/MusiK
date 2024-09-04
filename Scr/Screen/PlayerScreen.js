@@ -24,27 +24,34 @@ import {useLikeSongs} from '../store/likeStore';
 import {isExist} from '../data/Check';
 
 const PlayerScreen = () => {
-  const {likedSongs, addToLiked} = useLikeSongs();
+  const {likedSongs, addToLiked, removeFromLiked, loadLikedSongs} =
+    useLikeSongs();
   const navigation = useNavigation();
   const route = useRoute();
   const [currentSong, setCurrentSong] = useState(route.params?.song || null);
   const [isLiked, setIsLiked] = useState(false);
   const [isMute, setIsMute] = useState(false);
 
+  // Function to set volume state
   const setVolume = async () => {
     const volume = await TrackPlayer.getVolume();
     setIsMute(volume === 0 ? true : false);
   };
+
+  // Effect to handle volume and initial data load
   useEffect(() => {
     setVolume();
+    // Load liked songs from storage once when the component mounts
+    loadLikedSongs();
+  }, [loadLikedSongs]);
+
+  // Effect to check if the current song is liked
+  useEffect(() => {
     // const isSongLiked = likedSongs.some(item => currentSong.url === item.url);
     const isSongLiked = isExist(likedSongs, currentSong);
-    if (isSongLiked) {
-      setIsLiked(true);
-    } else {
-      setIsLiked(false);
-    }
+    setIsLiked(isSongLiked);
   }, [likedSongs, currentSong]);
+
   // Handle track changes
   useTrackPlayerEvents([Event.PlaybackTrackChanged], async event => {
     if (event.type === Event.PlaybackTrackChanged) {
@@ -57,6 +64,15 @@ const PlayerScreen = () => {
   const handleToggleVolume = () => {
     TrackPlayer.setVolume(isMute ? 1 : 0);
     setIsMute(!isMute);
+  };
+
+  // Toggle like/unlike for the current song
+  const handleToggleLike = () => {
+    if (isLiked) {
+      removeFromLiked(currentSong).then(() => setIsLiked(false)); // Remove song from liked songs
+    } else {
+      addToLiked(currentSong).then(() => setIsLiked(true)); // Add song to liked songs
+    }
   };
 
   return (
@@ -81,18 +97,14 @@ const PlayerScreen = () => {
           />
         </View>
       )}
-      {/* Title and artist */}
+      {/* Song Title and artist */}
       {currentSong && (
         <View style={styles.titleRowHeartContainer}>
           <View style={styles.titleContainer}>
             <Text style={styles.title}>{currentSong.title}</Text>
             <Text style={styles.artist}>{currentSong.artist}</Text>
           </View>
-          <TouchableOpacity
-            onPress={() => {
-              setIsLiked(!isLiked);
-              addToLiked(currentSong);
-            }}>
+          <TouchableOpacity onPress={handleToggleLike}>
             <AntDesign
               name={isLiked ? 'heart' : 'hearto'}
               color={colors.iconSecondary}

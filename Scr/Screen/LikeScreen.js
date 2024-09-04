@@ -13,8 +13,6 @@ import TrackPlayer from 'react-native-track-player';
 const LikeScreen = () => {
   const navigation = useNavigation();
   const {likedSongs} = useLikeSongs();
-  const track = TrackPlayer.getActiveTrack();
-  console.log(track);
   const handlePlayTrack = async selectedTrack => {
     // console.log(selectedTrack);
     const Songs = likedSongs;

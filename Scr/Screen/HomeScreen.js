@@ -34,30 +34,41 @@ export default function Home() {
       setCurrentSong(track); // Update current song
     }
   });
+
+  // Combine data into a single array with a 'type' property to distinguish them
+  const combinedData = [
+    ...songsWithCategory.map(item => ({...item, type: 'song'})), // Add type 'song'
+    ...ShortSongsWithCategory.map(item => ({...item, type: 'short'})), // Add type 'short'
+  ];
+
   return (
     <SafeAreaView style={HomeStyle.container}>
       <Header />
       <ArtistCard />
-      <ScrollView>
-        <FlatList
-          data={songsWithCategory}
-          renderItem={({item}) => (
-            <SongCardWithCategory
-              item={item}
-              onPlay={setCurrentSong} // Pass function to update current song
-            />
-          )}
-        />
-        <FlatList
-          data={ShortSongsWithCategory}
-          renderItem={({item}) => (
-            <ShortsCardwithCategory
-              item={item}
-              onPlay={setCurrentSong} // Pass function to update current song
-            />
-          )}
-        />
-      </ScrollView>
+      <FlatList
+        data={combinedData}
+        keyExtractor={(item, index) =>
+          item.id ? item.id.toString() : `key-${index}`
+        }
+        renderItem={({item}) => {
+          if (item.type === 'song') {
+            return (
+              <SongCardWithCategory
+                item={item}
+                onPlay={setCurrentSong} // Pass function to update current song
+              />
+            );
+          } else if (item.type === 'short') {
+            return (
+              <ShortsCardwithCategory
+                item={item}
+                onPlay={setCurrentSong} // Pass function to update current song
+              />
+            );
+          }
+          return null; // In case there are other types
+        }}
+      />
       <FloatingPlayer song={currentSong} />
     </SafeAreaView>
   );
