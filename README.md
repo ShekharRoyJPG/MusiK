@@ -36,3 +36,36 @@ MusiK is a React Native music player application that allows users to play, paus
 - **Floating Player**: Displays the album art, song title, and artist name. It includes controls for play/pause, next, and previous tracks.
 - **Shuffle Toggle**: Tap the shuffle icon to shuffle the current playlist.
 - **Seek Slider**: Drag the slider to seek through the track.
+
+
+
+## Screen shots
+
+
+<div class="responsive-grid">
+  <!-- Image 1 with title -->
+  <div class="grid-item">
+    <img src="S1.png" alt="Screenshot 1">
+    <p>Home Screen</p>
+  </div>
+
+  <!-- Image 2 with title -->
+  <div class="grid-item">
+    <img src="S2.png" alt="Screenshot 2">
+    <p>Drawer screen</p>
+  </div>
+
+  <!-- Image 3 with title -->
+  <div class="grid-item">
+    <img src="S3.png" alt="Screenshot 3">
+    <p>Player Screen</p>
+  </div>
+
+  <!-- Image 4 with title -->
+  <div class="grid-item">
+    <img src="S4.png" alt="Screenshot 4">
+    <p>Liked Son</p>
+  </div>
+</div>
+
+
