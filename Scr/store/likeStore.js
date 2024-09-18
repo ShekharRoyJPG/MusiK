@@ -10,7 +10,6 @@ import {
   where,
   deleteDoc,
 } from 'firebase/firestore';
-addDoc;
 export const useLikeSongs = create(set => ({
   likedSongs: [],
 
@@ -92,7 +91,8 @@ export const useLikeSongs = create(set => ({
     try {
       // Try to load liked songs from Firestore first
       const userLikedSongsRef = collection(db, 'users', user.uid, 'likedSongs');
-      console.log(userLikedSongsRef);
+
+      // Query to get all songs from Firestore user's likedSongs collection
       const q = query(userLikedSongsRef);
       const querySnapshot = await getDocs(q);
       // console.log('querySnapshot : ', querySnapshot);
@@ -121,6 +121,10 @@ export const useLikeSongs = create(set => ({
     } catch (error) {
       console.error('Failed to load liked songs', error);
     }
+  },
+  resetLikedSongs: () => {
+    set({likedSongs: []});
+    AsyncStorage.removeItem('likedSongs').catch(console.error); // Clear from AsyncStorage
   },
 }));
 

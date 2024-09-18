@@ -41,9 +41,7 @@ const SongCardWithCategory = ({item, onPlay}) => {
           />
         )}
         horizontal={true}
-        // ItemSeparatorComponent={<View style={{marginHorizontal: 2}}
-        // />}
-        // contentContainerStyle={{paddingHorizontal: spacing.md}}
+        showsHorizontalScrollIndicator={false}
       />
     </View>
   );

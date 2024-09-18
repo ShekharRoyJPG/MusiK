@@ -14,18 +14,21 @@ import {useNavigation} from '@react-navigation/native';
 import {fontFamilies} from '../Scr/Constants/fonts';
 import {signOut} from 'firebase/auth';
 import {auth} from '../Firebase/config';
+import { useLikeSongs } from '../Scr/store/likeStore';
 
 const CustomDrawerContent = props => {
   const isDarkMode = true;
+  const {resetLikedSongs} = useLikeSongs();
   const handleSignOut = async () => {
     await signOut(auth);
+    resetLikedSongs();
     props.navigation.closeDrawer();
   };
   return (
     <DrawerContentScrollView style={styles.container}>
       {/* <DrawerItemList {...props} /> */}
       <View style={styles.headerIconContainer}>
-      <TouchableOpacity>
+        <TouchableOpacity>
           <Octicons
             name={isDarkMode ? 'sun' : 'moon'}
             size={iconSizes.lg}
@@ -39,7 +42,6 @@ const CustomDrawerContent = props => {
             color={colors.iconPrimary}
           />
         </TouchableOpacity>
-        
       </View>
       {/* drawer items */}
       <View style={styles.drawerItemContainer}>

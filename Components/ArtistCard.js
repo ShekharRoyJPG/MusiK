@@ -15,6 +15,7 @@ export default function ArtistCard() {
         data={Artists}
         renderItem={({item}) => <Artist item={item} />}
         horizontal={true}
+        showsHorizontalScrollIndicator={false}
         ItemSeparatorComponent={<View style={{marginHorizontal: 5}} />}
         contentContainerStyle={{
           paddingHorizontal: spacing.md,
