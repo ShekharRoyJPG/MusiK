@@ -35,7 +35,7 @@ const WelcomeScreen = () => {
         console.log(error);
       }
     }
-    Alert.alert('Success', 'login successful');
+    // Alert.alert('Success', 'login successful');
     setEmail('');
     setPassword('');
   };

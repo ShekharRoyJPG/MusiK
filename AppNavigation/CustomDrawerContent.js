@@ -14,13 +14,15 @@ import {useNavigation} from '@react-navigation/native';
 import {fontFamilies} from '../Scr/Constants/fonts';
 import {signOut} from 'firebase/auth';
 import {auth} from '../Firebase/config';
-import { useLikeSongs } from '../Scr/store/likeStore';
+import {useLikeSongs} from '../Scr/store/likeStore';
+import TrackPlayer from 'react-native-track-player';
 
 const CustomDrawerContent = props => {
   const isDarkMode = true;
   const {resetLikedSongs} = useLikeSongs();
   const handleSignOut = async () => {
     await signOut(auth);
+    await TrackPlayer.stop();
     resetLikedSongs();
     props.navigation.closeDrawer();
   };
